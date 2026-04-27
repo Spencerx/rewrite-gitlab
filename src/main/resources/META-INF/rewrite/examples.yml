@@ -262,6 +262,44 @@ examples:
     language: yaml
 ---
 type: specs.openrewrite.org/v1beta/example
+recipeName: org.openrewrite.gitlab.MigrateTemplateToComponent
+examples:
+- description: '`MigrateTemplateToComponentTest#migrateTemplateToComponent`'
+  parameters:
+  - Terraform/Base.latest.gitlab-ci.yml
+  - $CI_SERVER_FQDN/components/opentofu/job-templates
+  - ~latest
+  - 'List.of("version: ~latest", "opentofu_version: 1.6.0")'
+  sources:
+  - before: |
+      include:
+        - template: Terraform/Base.latest.gitlab-ci.yml
+    after: |
+      include:
+        - component: $CI_SERVER_FQDN/components/opentofu/job-templates@~latest
+          inputs:
+            version: ~latest
+            opentofu_version: 1.6.0
+    path: .gitlab-ci.yml
+    language: yaml
+---
+type: specs.openrewrite.org/v1beta/example
+recipeName: org.openrewrite.gitlab.MigrateTerraformTemplateToOpenTofuComponent
+examples:
+- description: '`MigrateTerraformTemplateToOpenTofuComponentTest#migrateTerraformTemplateToOpenTofuComponent`'
+  sources:
+  - before: |
+      include:
+        - template: Terraform/Base.latest.gitlab-ci.yml
+    after: |
+      include:
+        - component: $CI_SERVER_FQDN/components/opentofu/job-templates@~latest
+          inputs:
+            opentofu_version: 1.11.6
+    path: .gitlab-ci.yml
+    language: yaml
+---
+type: specs.openrewrite.org/v1beta/example
 recipeName: org.openrewrite.gitlab.MigrateToRules
 examples:
 - description: '`MigrateToRulesTest#migrateSimpleBranchRef`'
