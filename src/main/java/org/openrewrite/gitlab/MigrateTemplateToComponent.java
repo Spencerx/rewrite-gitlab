@@ -54,16 +54,10 @@ public class MigrateTemplateToComponent extends Recipe {
     @Nullable
     List<String> inputs;
 
-    @Override
-    public String getDisplayName() {
-        return "Migrate GitLab template to component";
-    }
+    String displayName = "Migrate GitLab template to component";
 
-    @Override
-    public String getDescription() {
-        return "Replace a GitLab `template:` include with a `component:` include, " +
-                "as recommended by GitLab's CI/CD Catalog migration guides.";
-    }
+    String description = "Replace a GitLab `template:` include with a `component:` include, " +
+            "as recommended by GitLab's CI/CD Catalog migration guides.";
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
